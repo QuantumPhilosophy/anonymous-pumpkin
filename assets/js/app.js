@@ -10,3 +10,8 @@ const config = {
   messagingSenderId: '149175598768'
 }
 firebase.initializeApp(config)
+
+
+$(window).on('load',function(){
+  $('#instructionModal').modal('show');
+});
