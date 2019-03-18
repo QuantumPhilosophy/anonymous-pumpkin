@@ -19,7 +19,8 @@ https://en.wikipedia.org/w/api.php
   * HTML 5
 
 #### Libraries Used
-Info on any libraries used for anonymous-pumpkin
+##### Dropzone
+https://www.dropzonejs.com/
 
 ## Other
 Using `.gitkeep` to hold the empty `images` directory in GitHub.
