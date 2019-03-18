@@ -4,7 +4,10 @@
 This app will take advantage of an image analysis API and then will return information from a second API based on the image's subjects
 
 ### APIs Used
+#### Google Cloud Vision
 https://cloud.google.com/vision/
+
+#### Wikipedia
 https://en.wikipedia.org/w/api.php
 
 ### Languages
@@ -14,6 +17,9 @@ https://en.wikipedia.org/w/api.php
   * Bootstrap 4
   * CSS 3
   * HTML 5
+
+#### Libraries Used
+Info on any libraries used for anonymous-pumpkin
 
 ## Other
 Using `.gitkeep` to hold the empty `images` directory in GitHub.
