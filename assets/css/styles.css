@@ -1,4 +1,21 @@
 body {
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  background-color: black;
+  background-color: darkgrey;
+}
+
+footer {
+  background-color:lightgrey;
+}
+
+.hide {
+  display:none;
+}
+
+
+#imgInputDiv {
+  height:300px;
+}
+
+#resultsDiv {
+  height:300px;
 }
