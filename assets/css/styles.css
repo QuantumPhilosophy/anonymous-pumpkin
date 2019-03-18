@@ -3,15 +3,19 @@ body {
   background-color: darkgrey;
 }
 
+footer {
+  background-color:lightgrey;
+}
+
 .hide {
   display:none;
 }
 
 
 #imgInputDiv {
-  height:500px;
+  height:300px;
 }
 
 #resultsDiv {
-  height:500px;
+  height:300px;
 }
