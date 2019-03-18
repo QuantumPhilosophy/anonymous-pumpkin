@@ -11,7 +11,33 @@ const config = {
 }
 firebase.initializeApp(config)
 
+$(window).on('load', function () {
+  //Image carousel loader
+  $('.multiple-items').slick({
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  })
 
-$(window).on('load',function(){
-  $('#instructionModal').modal('show');
-});
+  $('#instructionModal').modal('show')
+
+
+  
+})
+
+
+//Handles the animation transition for upload page -> results page
+//TODO: When we are adding reset page (or upload another image) might need to tinker with this
+//'hide' class simply sets display:none property
+$('#imgSubmit').on('click', function () {
+  $('#imgInputDiv').addClass('slideOutRight')
+  $('#imgInputDiv').on('animationend', function () {
+    $('#imgInputDiv').addClass('hide')
+    $('#resultsDiv').removeClass('hide')
+    $('#resultsDiv').addClass('slideInLeft')
+  })
+})
+
+
+
+$('form').submit(false)
