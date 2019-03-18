@@ -10,7 +10,7 @@ https://cloud.google.com/vision/
 #### Wikipedia
 https://en.wikipedia.org/w/api.php
 
-### Languages
+### Languages Used
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
   * JavaScript
   * jQuery
@@ -18,8 +18,8 @@ https://en.wikipedia.org/w/api.php
   * CSS 3
   * HTML 5
 
-#### Libraries Used
-##### Dropzone
+### Libraries Used
+#### Dropzone
 https://www.dropzonejs.com/
 
 ## Other
