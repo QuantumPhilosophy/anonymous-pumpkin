@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
   <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
   <title>Anonymous Pumpkin</title>
 </head>
 
 <body class="h-100">
-    <nav class="navbar navbar-light bg-light mb-5">
-      <a class="navbar-brand" href="index.html">PLACEHOLDER TITLE HERE</a>
+    <nav class="navbar navbar-light bg-light mb-4">
+      <a class="navbar-brand" href="index.html">Anon Pumpkin</a>
     </nav>
+
   <div class="container">
 
     <!-- Modal with instructions -->
@@ -26,7 +28,8 @@
             </button>
           </div>
           <div class="modal-body">
-              Instruction blurb should go here
+              Hi there!  Welcome to anonymous pumpkin.  Upload or link an image below, and we'll show you some info about whats in said image!
+              
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -38,16 +41,34 @@
   
 
   <!-- This div will handle the image uploading -->
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid animated fadeIn" id="imgInputDiv">
       <div class="container">
         <h1 class="display-4">Place your image here!</h1>
         <form>
             <div class="form-group">
               <label for="exampleInputEmail1">Image URL</label>
-              <input type="url" class="form-control" id="imgUrlInput" aria-describedby="emailHelp" placeholder="Enter email">
+              <input type="url" class="form-control" id="imgUrlInput" aria-describedby="emailHelp" placeholder="Enter image URL">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="imgSubmit" class="btn btn-primary">Submit</button>
           </form>
+      </div>
+    </div>
+
+    <!-- This div handles the results.  Will only show after a sucessful execution of the API calls -->
+    <div class="jumbotron jumbotron-fluid p-3 animated hide" id="resultsDiv">
+      <div class="container">
+
+        <!-- Top result row - row might not be necessary -->
+        <div class="row">
+          <div class="card w-100" id="res1Card">
+            <div class="card-header">
+              <h3>Your top result is... <span id = topResult>Placeholder</span></h3>
+            </div>
+            <div class="card-body">
+              <p class="topResSnippet">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad quod unde libero placeat pariatur esse possimus earum in, magni beatae, reiciendis repellendus vel doloribus. Eaque facilis perferendis necessitatibus labore tempore?</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -59,7 +80,9 @@
 </div>
 
 <footer class="footer">
-    
+  <div class="footer-copyright text-center py-3">
+      © 2018 Copyright: anon-pumpkin team
+  </div>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>

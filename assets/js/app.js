@@ -15,3 +15,16 @@ firebase.initializeApp(config)
 $(window).on('load',function(){
   $('#instructionModal').modal('show');
 });
+
+$('#imgSubmit').on('click', function() {
+  $('#imgInputDiv').addClass("slideOutRight")
+  $('#imgInputDiv').on('animationend', function() {
+    $('#imgInputDiv').addClass('hide')
+    $('#resultsDiv').removeClass('hide')
+    $('#resultsDiv').addClass("slideInLeft")
+  })
+
+
+})
+
+$('form').submit(false);
