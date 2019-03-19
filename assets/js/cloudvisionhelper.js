@@ -62,5 +62,5 @@ function start() {
         });
 };
 
-// sample: visionByURL("https://www.joelsartore.com/assets/stock/ANI022/ANI022-00035-400x264.jpg?x31785", 5);
+// sample: visionByURL("http://imgURL...", 5);
 
