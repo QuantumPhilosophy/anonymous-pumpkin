@@ -24,10 +24,11 @@ var FIREBASE_STUFF=[]
 
 //for (var i=0; i<FIREBASE_STUFF.length;i++) {
 $('#testCard').on('click', function() {
+
     var newCard = $('<div>')
     newCard.addClass('card')
-    newCard.attr('style', "width: 18rem;")
-
+    newCard.attr('style', "width: 20rem;")
+    newCard.addClass('mb-3 mr-5')
     var newCardImg = $('<img>')
     newCardImg.addClass('card-img-top')
     //Following line will need to have appropriate alt, probably just the tag thats used
@@ -47,6 +48,9 @@ $('#testCard').on('click', function() {
     newCardTextDiv.append(newCardTextVal)
     newCard.append(newCardImg)
     newCard.append(newCardTextDiv)
+
     $('#cards').append(newCard)
+
+
 })
 //}
