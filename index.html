@@ -1,27 +1,35 @@
 <!doctype html>
 <html lang="en-US" class="h-100">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"/>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"/>
+
   <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 
   <title>Anonymous Pumpkin</title>
 </head>
 
 <body class="h-100">
-    <nav class="navbar navbar-light bg-light mb-4">
-      <a class="navbar-brand" href="index.html">Anon Pumpkin</a>
-    </nav>
+  <nav class="navbar navbar-light bg-light mb-4">
+    <a class="navbar-brand" href="index.html">Anon Pumpkin</a>
+  </nav>
 
   <div class="container">
 
     <!-- Modal with instructions -->
-    <div class="modal fade" id="instructionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
+    <div class="modal fade" id="instructionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="false">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -31,8 +39,9 @@
             </button>
           </div>
           <div class="modal-body">
-              Hi there!  Welcome to anonymous pumpkin.  Upload or link an image below, and we'll show you some info about whats in said image!
-              
+            Hi there! Welcome to anonymous pumpkin. Upload or link an image below, and we'll show you some info about
+            whats in said image!
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -41,19 +50,20 @@
       </div>
     </div>
     <!-- nav bar - clicking on returns you to index page -->
-  
 
-  <!-- This div will handle the image uploading -->
+
+    <!-- This div will handle the image uploading -->
     <div class="jumbotron jumbotron-fluid animated fadeIn" id="imgInputDiv">
       <div class="container">
         <h1 class="display-4">Place your image here!</h1>
         <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Image URL</label>
-              <input type="url" class="form-control" id="imgUrlInput" aria-describedby="emailHelp" placeholder="Enter image URL">
-            </div>
-            <button type="submit" id="imgSubmit" class="btn btn-primary">Submit</button>
-          </form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Image URL</label>
+            <input type="url" class="form-control" id="imgUrlInput" aria-describedby="emailHelp"
+              placeholder="Enter image URL">
+          </div>
+          <button type="submit" id="imgSubmit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
     </div>
 
@@ -65,38 +75,47 @@
         <div class="row">
           <div class="card w-100" id="res1Card">
             <div class="card-header">
-              <h3>Your top result is... <span id = topResult>Placeholder</span></h3>
+              <h3>Your top result is... <span id=topResult>Placeholder</span></h3>
             </div>
             <div class="card-body">
-              <p class="topResSnippet">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad quod unde libero placeat pariatur esse possimus earum in, magni beatae, reiciendis repellendus vel doloribus. Eaque facilis perferendis necessitatibus labore tempore?</p>
+              <p class="topResSnippet">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad quod unde libero
+                placeat pariatur esse possimus earum in, magni beatae, reiciendis repellendus vel doloribus. Eaque
+                facilis perferendis necessitatibus labore tempore?</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-  <!-- This is a placeholder div for the image carousel -->
+
+    <!-- This is a placeholder div for the image carousel -->
     <div class="center">
+
       <div><img src="https://via.placeholder.com/150"></div>
       <div><img src="https://via.placeholder.com/150"></div>
       <div><img src="https://via.placeholder.com/150"></div>
       <div><img src="https://via.placeholder.com/150"></div>
     </div>
 
-</div>
+  </div>
+
 
 <footer class="footer fixed-bottom mt-2">
   <div class="footer-copyright text-center py-3">
       © 2018 Copyright: anon-pumpkin team
-  </div>
-</footer>
+    </div>
+  </footer>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="assets/js/cloudvisionhelper.js"></script>
 <script src="assets/js/app.js"></script>
 
+
 </body>
+
 </html>
