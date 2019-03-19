@@ -2,6 +2,7 @@
 // takes in a POST request, not a GET
 // takes an object in POST request, returns an object with results
 // uses google API helper library gapi
+// ***REQUIRES LIVE SERVER WHEN IN TEST ENVIRONMENT***
 
 var search = {
     "requests": [
