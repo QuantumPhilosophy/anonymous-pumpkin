@@ -11,18 +11,39 @@ const config = {
 }
 firebase.initializeApp(config)
 
-$(window).on('load', function () {
+$(window).ready(function()  {
   //Image carousel loader
-  $('.multiple-items').slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  })
-
   $('#instructionModal').modal('show')
-
-
-  
+  // $('.multiple-items').slick({
+  //   infinite: true,
+  //   slidesToShow: 3,
+  //   slidesToScroll: 3
+  // })
+  $('.center').slick({
+    centerMode: true,
+    centerPadding: '60px',
+    slidesToShow: 3,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: '40px',
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: '40px',
+          slidesToShow: 1
+        }
+      }
+    ]
+  });
 })
 
 
