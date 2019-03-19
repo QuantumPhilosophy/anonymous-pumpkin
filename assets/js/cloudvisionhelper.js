@@ -15,14 +15,14 @@ var search = {
             "features": [
                 {
                     "type": "LABEL_DETECTION",
-                    "maxResults": 1
+                    "maxResults": 5
                 }
             ]
         }
     ]
 }
 
-//takes in a URL in the form of a string, and optionally max number of results (default is 1)
+//takes in a URL in the form of a string, and max number of results 
 //returns response object
 function visionByURL(url, numResults) {
     search.requests[0].image.source.imageUri = url;
