@@ -1,6 +1,6 @@
 body {
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  background-color: darkgrey;
+  background-color: grey;
 }
 
 footer {
@@ -19,7 +19,7 @@ footer {
 #resultsDiv {
   height:300px;
 }
+
 .spacer {
   height:10vh;
 }
-
