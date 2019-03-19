@@ -1,9 +1,7 @@
 // google vision API key: AIzaSyB5sUYWoVsXdrrobdoe9u2NUiTP-QrbuQU
 // takes in a POST request, not a GET
 // takes an object in POST request, returns an object with results
-
-// The format of the data being sent in the ajax request is described here:
-// https://cloud.google.com/vision/docs/request#json_request_format
+// uses google API helper library gapi
 
 var search = {
     "requests": [
