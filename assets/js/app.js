@@ -14,11 +14,7 @@ firebase.initializeApp(config)
 $(window).ready(function()  {
   //Image carousel loader
   $('#instructionModal').modal('show')
-  // $('.multiple-items').slick({
-  //   infinite: true,
-  //   slidesToShow: 3,
-  //   slidesToScroll: 3
-  // })
+  
   $('.center').slick({
     centerMode: true,
     centerPadding: '60px',
@@ -52,11 +48,18 @@ $(window).ready(function()  {
 //'hide' class simply sets display:none property
 $('#imgSubmit').on('click', function () {
   $('#imgInputDiv').addClass('slideOutRight')
+  
+
   $('#imgInputDiv').on('animationend', function () {
     $('#imgInputDiv').addClass('hide')
     $('#resultsDiv').removeClass('hide')
     $('#resultsDiv').addClass('slideInLeft')
+    $('#reset').removeClass('hide')
   })
+})
+
+$('#reset').on('click', function() {
+  location.reload()
 })
 
 
