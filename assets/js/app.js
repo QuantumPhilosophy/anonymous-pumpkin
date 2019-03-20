@@ -101,14 +101,6 @@ function start () {
     })
 };
 
-// firebase listener
-database.ref().on('child_changed', function (snapshot) {
-  // checks if the change was because google cloud vision just completed
-  if (snapshot.key === 'newSearch') {
-    // create buttons of the labels in the snapshot, which will trigger wikipedia API
-  }
-})
-
 // Wikipedia Helper Function
 const callWikipedia = (wikiSearchTerm) => {
   $.ajax({
