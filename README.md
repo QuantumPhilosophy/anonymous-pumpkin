@@ -24,5 +24,7 @@ https://daneden.github.io/animate.css/
 
 http://kenwheeler.github.io/slick/
 
+https://marcbruederlin.github.io/particles.js/
+
 ## Other
 Using `.gitkeep` to hold the empty `images` directory in GitHub.
