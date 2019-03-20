@@ -11,7 +11,7 @@ const config = {
 }
 firebase.initializeApp(config)
 
-var database = firebase.database()
+let database = firebase.database()
 
 // google vision API key: AIzaSyB5sUYWoVsXdrrobdoe9u2NUiTP-QrbuQU
 // takes in a POST request, not a GET
@@ -20,7 +20,7 @@ var database = firebase.database()
 
 // ***************REQUIRES LIVE SERVER WHEN IN TEST ENVIRONMENT***************
 
-var search = {
+let search = {
   'requests': [
     {
       'image': {
@@ -39,7 +39,7 @@ var search = {
   ]
 }
 
-var searchUrl
+let searchUrl
 // takes in a URL in the form of a string, and max number of results
 // returns response object
 function visionByURL (url, numResults) {
@@ -65,15 +65,15 @@ function start () {
       })
     })
     .then(function (response) {
-      var labels = []
-      var rawLabels = response.result.responses[0].labelAnnotations
+      let labels = []
+      let rawLabels = response.result.responses[0].labelAnnotations
 
-      for (var i = 0; i < rawLabels.length; i++) {
+      for (let i = 0; i < rawLabels.length; i++) {
         labels[i] = rawLabels[i].description
       }
 
       // update firebase
-      var dataObj = {
+      let dataObj = {
         url: searchUrl,
         labels: labels
       }
@@ -82,10 +82,10 @@ function start () {
       // only add new search to gallery if it doesn't already exist
       database.ref().child('gallery').once('value', function (bigSnapshot) {
         // grab database, loop through gallery, parse objects, check URLs
-        var entries = bigSnapshot.val()
+        let entries = bigSnapshot.val()
         let arr = Object.entries(entries).map(e => Object.assign(e[1], { key: e[0] }))
-        var isThere = false
-        for (var i = 0; i < arr.length; i++) {
+        let isThere = false
+        for (let i = 0; i < arr.length; i++) {
           if (JSON.parse(arr[i]).url === dataObj.url) {
             isThere = true
           }
@@ -144,14 +144,13 @@ $('.center').slick({
   centerPadding: '60px',
   slidesToShow: 3,
   adaptiveHeight: true,
-
   responsive: [
     {
       breakpoint: 768,
       settings: {
         arrows: false,
         centerMode: true,
-        centerPadding: '40px',
+      centerPadding: '40px',
         slidesToShow: 3
       }
     },
@@ -169,11 +168,11 @@ $('.center').slick({
 
 // Populates the carousel
 database.ref().child('gallery').once('value', function (galSnapshot) {
-  var value = galSnapshot.val()
+  let value = galSnapshot.val()
   let arr = Object.entries(value).map(e => Object.assign(e[1], { key: e[0] }))
-  for (var i = 0; i < arr.length; i++) {
-    var newCaroVal = $('<img>')
-    var url = JSON.parse(arr[i])
+  for (let i = 0; i < arr.length; i++) {
+    let newCaroVal = $('<img>')
+    let url = JSON.parse(arr[i])
     url = url.url
     newCaroVal.attr('src', url)
     newCaroVal.css('max-height', '200px')
@@ -189,7 +188,7 @@ $(window).ready(function () {
   Particles.init({
     selector: '.background',
     connectParticles: true
-  });
+  })
 })
 
 // Handles the animation transition for upload page -> results page
@@ -214,3 +213,5 @@ $(document).on('click', '.label-button', (event) => {
 $('#reset').on('click', function () {
   location.reload()
 })
+
+$('form').submit(false)
