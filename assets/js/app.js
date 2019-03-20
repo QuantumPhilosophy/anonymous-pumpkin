@@ -91,7 +91,6 @@ function start () {
           }
         }
         if (!isThere) {
-          console.log('no duplicate entry found, adding')
           database.ref().child('gallery').push(JSON.stringify(dataObj))
         }
       })
@@ -185,6 +184,12 @@ database.ref().child('gallery').once('value', function (galSnapshot) {
 // Window Load and DOM interaction
 $(window).ready(function () {
   $('#instructionModal').modal('show')
+
+  // Image carousel loader
+  Particles.init({
+    selector: '.background',
+    connectParticles: true
+  });
 })
 
 // Handles the animation transition for upload page -> results page
@@ -203,12 +208,9 @@ $('#imgSubmit').on('click', function () {
 })
 
 $(document).on('click', '.label-button', (event) => {
-  console.log(event)
   callWikipedia(event.target.value)
 })
 
 $('#reset').on('click', function () {
   location.reload()
 })
-
-$('form').submit(false)
