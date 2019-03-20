@@ -144,3 +144,27 @@ database.ref().on('child_changed', function (snapshot) {
     // create buttons of the labels in the snapshot, which will trigger wikipedia API
   }
 })
+
+// Wikipedia Helper Functions
+const wikiSearchTermValue = 'wolf'
+
+const callWikipedia = (wikiSearchTerm) => {
+  $.ajax({
+    'url': 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + wikiSearchTerm + '&limit=5&namespace=0&format=json&origin=*'
+  }).then(function (response) {
+    populateWikiCards(response)
+  })
+}
+
+const populateWikiCards = (params) => {
+  for (let i = 0; i < params[1].length; i++) {
+    for (let j = 0; j < params[0][j].length; j++) {
+      console.log('*********************')
+      console.log('returnedSearchItem:', params[1][i])
+      console.log('returnedSearchSnippet:', params[2][i])
+      console.log('returnedSearchUrl:', params[3][i])
+    }
+  }
+}
+
+callWikipedia(wikiSearchTermValue)
