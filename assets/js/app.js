@@ -185,7 +185,10 @@ database.ref().child('gallery').once("value", function(galSnapshot) {
 $(window).ready(function () {
   $('#instructionModal').modal('show')
   // Image carousel loader
-  
+  Particles.init({
+    selector: '.background',
+    connectParticles: true
+  });
 })
 
 
@@ -209,8 +212,5 @@ $('#reset').on('click', function () {
 })
 
 window.onload = function () {
-    Particles.init({
-      selector: '.background',
-      connectParticles: true
-    });
+    
 };
