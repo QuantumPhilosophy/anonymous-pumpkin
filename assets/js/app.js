@@ -101,8 +101,6 @@ function start () {
     })
 };
 
-// visionByURL('https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr06/2013/5/7/10/enhanced-buzz-16842-1367938322-0.jpg?downsize=700:*&output-format=auto&output-quality=auto', 5)
-
 // firebase listener
 database.ref().on('child_changed', function (snapshot) {
   // checks if the change was because google cloud vision just completed
