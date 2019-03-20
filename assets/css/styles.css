@@ -11,13 +11,17 @@ footer {
   display:none;
 }
 
+.result-img {
+  height: 200px;
+  width: auto;
+}
 
 #imgInputDiv {
-  height:300px;
+  min-height:300px;
 }
 
 #resultsDiv {
-  height:300px;
+  min-height:300px;
 }
 
 .spacer {
