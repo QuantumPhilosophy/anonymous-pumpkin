@@ -42,7 +42,7 @@ var search = {
 var searchUrl
 // takes in a URL in the form of a string, and max number of results
 // returns response object
-function visionByURL (url, numResults) {
+function visionByURL(url, numResults) {
   search.requests[0].image.source.imageUri = url
   search.requests[0].features[0].maxResults = numResults
   searchUrl = url
@@ -50,7 +50,7 @@ function visionByURL (url, numResults) {
   return gapi.load('client', start)
 }
 
-function start () {
+function start() {
   // 2. Initialize the JavaScript client library.
   return gapi.client.init({
     'apiKey': 'AIzaSyB5sUYWoVsXdrrobdoe9u2NUiTP-QrbuQU'
@@ -78,13 +78,29 @@ function start () {
         labels: labels
       }
       database.ref().child('newSearch').set(JSON.stringify(dataObj))
-      database.ref().child('gallery').push(JSON.stringify(dataObj))
+
+      //only add new search to gallery if it doesn't already exist
+      database.ref().child('gallery').once("value", function (bigSnapshot) {
+        //grab database, loop through gallery, parse objects, check URLs
+        var entries = bigSnapshot.val();
+        let arr = Object.entries(entries).map(e => Object.assign(e[1], { key: e[0] }));
+        var isThere = false;
+        for (var i = 0; i < arr.length; i++) {
+          if (JSON.parse(arr[i]).url === dataObj.url) {
+            isThere = true
+          }
+        }
+        if (!isThere) {
+          console.log("no duplicate entry found, adding")
+          database.ref().child('gallery').push(JSON.stringify(dataObj))
+        }
+      })
     }, function (reason) {
       console.log('Error: ' + reason.result.error.message)
     })
 };
 
-// visionByURL("https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr06/2013/5/7/10/enhanced-buzz-16842-1367938322-0.jpg?downsize=700:*&output-format=auto&output-quality=auto", 5);
+visionByURL("https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr06/2013/5/7/10/enhanced-buzz-16842-1367938322-0.jpg?downsize=700:*&output-format=auto&output-quality=auto", 5);
 
 // firebase listener
 database.ref().on('child_changed', function (snapshot) {
