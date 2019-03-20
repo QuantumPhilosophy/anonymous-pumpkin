@@ -21,5 +21,14 @@ footer {
 }
 
 .spacer {
-  height:10vh;
+  height:15vh;
+}
+
+/* the slides */
+.slick-slide {
+  margin: 0 10px;
+}
+/* the parent */
+.slick-list {
+  margin: 0 -10px;
 }

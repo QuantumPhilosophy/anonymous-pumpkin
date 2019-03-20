@@ -70,7 +70,6 @@ function start () {
       for (var i = 0; i < rawLabels.length; i++) {
         labels[i] = rawLabels[i].description
       }
-      console.log('Labels array: ', labels)
 
       // update firebase
       var dataObj = {
@@ -124,47 +123,72 @@ const callWikipedia = (wikiSearchTerm) => {
 const populateWikiCards = (params) => {
   for (let i = 0; i < params[1].length; i++) {
     for (let j = 0; j < params[0][j].length; j++) {
-      console.log('*********************')
-      console.log('returnedSearchItem:', params[1][i])
-      console.log('returnedSearchSnippet:', params[2][i])
-      console.log('returnedSearchUrl:', params[3][i])
+      // console.log('*********************')
+      // console.log('returnedSearchItem:', params[1][i])
+      // console.log('returnedSearchSnippet:', params[2][i])
+      // console.log('returnedSearchUrl:', params[3][i])
     }
   }
 }
 
 callWikipedia(wikiSearchTermValue)
 
+
+
+
+
+$('.center').slick({
+  centerMode: true,
+  centerPadding: '60px',
+  slidesToShow: 3,
+  adaptiveHeight: true,
+
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
+    }
+  ]
+})
+
+//Populates the carousel
+database.ref().child('gallery').once("value", function(galSnapshot) { 
+  var value=galSnapshot.val()
+  let arr = Object.entries(value).map(e => Object.assign(e[1], { key: e[0]}))
+  for (var i = 0; i<arr.length; i++) {
+    var newCaroVal = $('<img>')
+    var url = JSON.parse(arr[i])
+    //YO DAWG
+    url = url.url
+    newCaroVal.attr('src', url)
+    newCaroVal.css('max-height', '200px')
+    $('.center').slick('slickAdd', newCaroVal);
+  }
+})
+
+
 // Window Load and DOM interaction
 $(window).ready(function () {
   $('#instructionModal').modal('show')
-
   // Image carousel loader
-  $('.center').slick({
-    centerMode: true,
-    centerPadding: '60px',
-    slidesToShow: 3,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 3
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 1
-        }
-      }
-    ]
-  })
+  
 })
+
+
 
 // Handles the animation transition for upload page -> results page
 // TODO: When we are adding reset page (or upload another image) might need to tinker with this

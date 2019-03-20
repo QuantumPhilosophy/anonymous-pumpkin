@@ -19,8 +19,10 @@ https://en.wikipedia.org/w/api.php
   * HTML 5
 
 ### Libraries Used
-#### Dropzone
-https://www.dropzonejs.com/
+
+https://daneden.github.io/animate.css/
+
+http://kenwheeler.github.io/slick/
 
 ## Other
 Using `.gitkeep` to hold the empty `images` directory in GitHub.
