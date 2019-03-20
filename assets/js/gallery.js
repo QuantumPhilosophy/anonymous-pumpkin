@@ -17,36 +17,54 @@ $(window).on('load', function () {
   })
 })
 
+// Initialize Firebase
+const config = {
+  apiKey: 'AIzaSyCx0YFX55Dn5KpBEvdzL9BMotSIld3G8-M',
+  authDomain: 'anonymous-pumpkin.firebaseapp.com',
+  databaseURL: 'https://anonymous-pumpkin.firebaseio.com',
+  projectId: 'anonymous-pumpkin',
+  storageBucket: 'anonymous-pumpkin.appspot.com',
+  messagingSenderId: '149175598768'
+}
+firebase.initializeApp(config)
+
+var database = firebase.database()
+
 // This will generate cards based off images in the firebase store
 // will have to be tweaked to fit what firebase puts out
-var FIREBASE_STUFF = []
 
-// for (var i=0; i<FIREBASE_STUFF.length;i++) {
-$('#testCard').on('click', function () {
-  var newCard = $('<div>')
-  newCard.addClass('card')
-  newCard.attr('style', 'width: 20rem;')
-  newCard.addClass('mb-3 mr-5')
-  var newCardImg = $('<img>')
-  newCardImg.addClass('card-img-top')
-  // Following line will need to have appropriate alt, probably just the tag thats used
-  newCardImg.attr('alt', 'firebase tag')
+database.ref().child('gallery').once('value', function (snapshot) {
+  // grab database, loop through gallery, parse objects
+  var entries = snapshot.val()
+  let arr = Object.entries(entries).map(e => Object.assign(e[1], { key: e[0] }))
+  for (var i=0; i<arr.length; i++){
+    arr[i] = JSON.parse(arr[i])
+  }
 
-  // Following line will need to change for
-  // newCardImg.attr('src', FIREBASE_STUFF.image)
-  newCardImg.attr('src', 'https://via.placeholder.com/350x150')
-  var newCardTextDiv = $('<div>')
-  newCardTextDiv.addClass('card-body')
+  for (var i = 0; i < arr.length; i++) {
+    var newCard = $('<div>')
+    newCard.addClass('card')
+    newCard.attr('style', 'width: 20rem;')
+    newCard.addClass('mb-3 mr-5')
+    var newCardImg = $('<img>')
+    newCardImg.addClass('card-img-top')
+    // Following line will need to have appropriate alt, probably just the tag thats used
+    // newCardImg.attr('alt', 'firebase tag')
 
-  var newCardTextVal = $('<p>')
-  newCardTextVal.addClass('card-text')
-  // wiki snippet will need to be added here
-  newCardTextVal.text('Wiki snippet goes here')
+    // Following line will need to change for
+    newCardImg.attr('src', arr[i].url)
+    var newCardTextDiv = $('<div>')
+    newCardTextDiv.addClass('card-body')
 
-  newCardTextDiv.append(newCardTextVal)
-  newCard.append(newCardImg)
-  newCard.append(newCardTextDiv)
+    var newCardTextVal = $('<p>')
+    newCardTextVal.addClass('card-text')
+    // wiki snippet will need to be added here
+    newCardTextVal.text(arr[i].labels)
 
-  $('#cards').append(newCard)
+    newCardTextDiv.append(newCardTextVal)
+    newCard.append(newCardImg)
+    newCard.append(newCardTextDiv)
+
+    $('#cards').append(newCard)
+  }
 })
-// }
