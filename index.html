@@ -64,35 +64,27 @@
       </div>
     </div>
 
-    <!-- This div handles the results.  Will only show after a sucessful execution of the API calls -->
+    <!-- This div handles the results.  Will only show after a successful execution of the API calls -->
     <div class="jumbotron jumbotron-fluid p-3 animated hide" id="resultsDiv">
-      <div class="container">
 
-        <!-- Top result row - row might not be necessary -->
-        <div class="row">
-          <div class="card w-100" id="res1Card">
-            <div class="card-header">
-              <h3>Your top result is... <span id="topResult">Placeholder</span></h3>
-            </div>
-            <div class="card-body">
-              <p class="topResSnippet">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad quod unde libero
-                placeat pariatur esse possimus earum in, magni beatae, reiciendis repellendus vel doloribus. Eaque
-                facilis perferendis necessitatibus labore tempore?</p>
-            </div>
-          </div>
+      <!-- Top result row - row might not be necessary -->
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Results for image:</h3>
+          <div id="img-url"></div>
+          <div id="label-buttons"></div>
         </div>
       </div>
+      <div id="result-cards" class="row"></div>
+
     </div>
 
-  <!-- This is a placeholder div for the image carousel -->
-    <div class="center" id="imgCaro">
-      
-    </div>
+    <!-- This is a placeholder div for the image carousel -->
+    <div class="center" id="imgCaro"></div>
 
   </div>
 
   <div class="spacer"></div>
-
 
   <footer class="footer fixed-bottom mt-2">
     <div class="footer-copyright text-center py-3">
