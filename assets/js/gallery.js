@@ -37,7 +37,7 @@ database.ref().child('gallery').once('value', function (snapshot) {
   // grab database, loop through gallery, parse objects
   var entries = snapshot.val()
   let arr = Object.entries(entries).map(e => Object.assign(e[1], { key: e[0] }))
-  for (var i=0; i<arr.length; i++){
+  for (var i = 0; i < arr.length; i++) {
     arr[i] = JSON.parse(arr[i])
   }
 
