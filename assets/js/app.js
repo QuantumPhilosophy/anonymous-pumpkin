@@ -43,9 +43,10 @@ var searchUrl
 // takes in a URL in the form of a string, and max number of results
 // returns response object
 function visionByURL (url, numResults) {
-  search.requests[0].image.source.imageUri = url
+  search.requests[0].image.source.imageUri = url + '?downsize=700:*&output-format=auto&output-quality=auto'
   search.requests[0].features[0].maxResults = numResults
   searchUrl = url
+
   // 1. Load the JavaScript client library.
   return gapi.load('client', start)
 }
@@ -90,28 +91,16 @@ function start () {
           }
         }
         if (!isThere) {
-          console.log('no duplicate entry found, adding')
           database.ref().child('gallery').push(JSON.stringify(dataObj))
         }
       })
+      populateLabelButtons(labels)
     }, function (reason) {
       console.log('Error: ' + reason.result.error.message)
     })
 };
 
-//visionByURL('https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr06/2013/5/7/10/enhanced-buzz-16842-1367938322-0.jpg?downsize=700:*&output-format=auto&output-quality=auto', 5)
-
-// firebase listener
-database.ref().on('child_changed', function (snapshot) {
-  // checks if the change was because google cloud vision just completed
-  if (snapshot.key === 'newSearch') {
-    // create buttons of the labels in the snapshot, which will trigger wikipedia API
-  }
-})
-
-// Wikipedia Helper Functions
-const wikiSearchTermValue = 'wolf'
-
+// Wikipedia Helper Function
 const callWikipedia = (wikiSearchTerm) => {
   $.ajax({
     'url': 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + wikiSearchTerm + '&limit=5&namespace=0&format=json&origin=*'
@@ -120,23 +109,36 @@ const callWikipedia = (wikiSearchTerm) => {
   })
 }
 
+// Window Load and DOM interaction
+const populateLabelButtons = (labels) => {
+  for (let i = 0; i < labels.length; i++) {
+    const labelButton = $(`<button class="label-button btn btn-secondary m-1" value="${labels[i]}">${labels[i]}</button>`)
+    $('#label-buttons').append(labelButton)
+  }
+}
+
 const populateWikiCards = (params) => {
+  $('#result-cards').empty()
   for (let i = 0; i < params[1].length; i++) {
     for (let j = 0; j < params[0][j].length; j++) {
-      // console.log('*********************')
-      // console.log('returnedSearchItem:', params[1][i])
-      // console.log('returnedSearchSnippet:', params[2][i])
-      // console.log('returnedSearchUrl:', params[3][i])
+      let newColumn = $('<div class="col-sm-12 col-md-6 col-lg-4 my-1">')
+      let newCard = $('<div class="card">')
+      let newCardBody = $('<div class="card-body">')
+      let newCardTitle = $(`<h4 class="card-title">${params[1][i]}</h4>`)
+      let newCardText = $(`<p class="card-text">${params[2][i]}</p>`)
+      let newCardButton = $(`<a href="${params[3][i]}" class="btn btn-secondary" target="_blank">Read More</a>`)
+
+      newCardBody.append(newCardTitle)
+      newCardBody.append(newCardText)
+      newCardBody.append(newCardButton)
+      newCard.append(newCardBody)
+      newColumn.append(newCard)
+      $('#result-cards').append(newColumn)
     }
   }
 }
 
-callWikipedia(wikiSearchTermValue)
-
-
-
-
-
+// Image carousel loader
 $('.center').slick({
   centerMode: true,
   centerPadding: '60px',
@@ -165,25 +167,24 @@ $('.center').slick({
   ]
 })
 
-//Populates the carousel
-database.ref().child('gallery').once("value", function(galSnapshot) { 
-  var value=galSnapshot.val()
-  let arr = Object.entries(value).map(e => Object.assign(e[1], { key: e[0]}))
-  for (var i = 0; i<arr.length; i++) {
+// Populates the carousel
+database.ref().child('gallery').once('value', function (galSnapshot) {
+  var value = galSnapshot.val()
+  let arr = Object.entries(value).map(e => Object.assign(e[1], { key: e[0] }))
+  for (var i = 0; i < arr.length; i++) {
     var newCaroVal = $('<img>')
     var url = JSON.parse(arr[i])
-    //YO DAWG
     url = url.url
     newCaroVal.attr('src', url)
     newCaroVal.css('max-height', '200px')
-    $('.center').slick('slickAdd', newCaroVal);
+    $('.center').slick('slickAdd', newCaroVal)
   }
 })
-
 
 // Window Load and DOM interaction
 $(window).ready(function () {
   $('#instructionModal').modal('show')
+
   // Image carousel loader
   Particles.init({
     selector: '.background',
@@ -191,14 +192,13 @@ $(window).ready(function () {
   });
 })
 
-
-
 // Handles the animation transition for upload page -> results page
 // TODO: When we are adding reset page (or upload another image) might need to tinker with this
 // 'hide' class simply sets display:none property
 $('#imgSubmit').on('click', function () {
+  visionByURL($('#imgUrlInput').val(), 5)
+  $('#img-url').html($(`<img src="${searchUrl}" class="result-img">`))
   $('#imgInputDiv').addClass('slideOutRight')
-
   $('#imgInputDiv').on('animationend', function () {
     $('#imgInputDiv').addClass('hide')
     $('#resultsDiv').removeClass('hide')
@@ -207,10 +207,10 @@ $('#imgSubmit').on('click', function () {
   })
 })
 
+$(document).on('click', '.label-button', (event) => {
+  callWikipedia(event.target.value)
+})
+
 $('#reset').on('click', function () {
   location.reload()
 })
-
-window.onload = function () {
-    
-};
