@@ -91,7 +91,6 @@ function start () {
           }
         }
         if (!isThere) {
-          console.log('no duplicate entry found, adding')
           database.ref().child('gallery').push(JSON.stringify(dataObj))
         }
       })
@@ -145,14 +144,13 @@ $('.center').slick({
   centerPadding: '60px',
   slidesToShow: 3,
   adaptiveHeight: true,
-
   responsive: [
     {
       breakpoint: 768,
       settings: {
         arrows: false,
         centerMode: true,
-        centerPadding: '40px',
+      centerPadding: '40px',
         slidesToShow: 3
       }
     },
@@ -209,7 +207,6 @@ $('#imgSubmit').on('click', function () {
 })
 
 $(document).on('click', '.label-button', (event) => {
-  console.log(event)
   callWikipedia(event.target.value)
 })
 
