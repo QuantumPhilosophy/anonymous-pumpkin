@@ -70,7 +70,6 @@ function start () {
       for (var i = 0; i < rawLabels.length; i++) {
         labels[i] = rawLabels[i].description
       }
-      //console.log('Labels array: ', labels)
 
       // update firebase
       var dataObj = {
@@ -80,7 +79,7 @@ function start () {
       database.ref().child('newSearch').set(JSON.stringify(dataObj))
       database.ref().child('gallery').push(JSON.stringify(dataObj))
     }, function (reason) {
-      //console.log('Error: ' + reason.result.error.message)
+      console.log('Error: ' + reason.result.error.message)
     })
 };
 

@@ -19,8 +19,6 @@ https://en.wikipedia.org/w/api.php
   * HTML 5
 
 ### Libraries Used
-#### Dropzone
-https://www.dropzonejs.com/
 
 https://daneden.github.io/animate.css/
 
