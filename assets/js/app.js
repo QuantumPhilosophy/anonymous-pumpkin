@@ -11,10 +11,12 @@ const config = {
 }
 firebase.initializeApp(config)
 
+var database = firebase.database()
+
 $(window).ready(function () {
-  //Image carousel loader
   $('#instructionModal').modal('show')
 
+  // Image carousel loader
   $('.center').slick({
     centerMode: true,
     centerPadding: '60px',
@@ -39,16 +41,14 @@ $(window).ready(function () {
         }
       }
     ]
-  });
+  })
 })
 
-
-//Handles the animation transition for upload page -> results page
-//TODO: When we are adding reset page (or upload another image) might need to tinker with this
-//'hide' class simply sets display:none property
+// Handles the animation transition for upload page -> results page
+// TODO: When we are adding reset page (or upload another image) might need to tinker with this
+// 'hide' class simply sets display:none property
 $('#imgSubmit').on('click', function () {
   $('#imgInputDiv').addClass('slideOutRight')
-
 
   $('#imgInputDiv').on('animationend', function () {
     $('#imgInputDiv').addClass('hide')
@@ -62,10 +62,7 @@ $('#reset').on('click', function () {
   location.reload()
 })
 
-
-
 $('form').submit(false)
-
 
 // google vision API key: AIzaSyB5sUYWoVsXdrrobdoe9u2NUiTP-QrbuQU
 // takes in a POST request, not a GET
@@ -75,39 +72,39 @@ $('form').submit(false)
 // ***************REQUIRES LIVE SERVER WHEN IN TEST ENVIRONMENT***************
 
 var search = {
-  "requests": [
+  'requests': [
     {
-      "image": {
-        "source": {
-          "imageUri":
-            ""
+      'image': {
+        'source': {
+          'imageUri':
+            ''
         }
       },
-      "features": [
+      'features': [
         {
-          "type": "LABEL_DETECTION",
-          "maxResults": 5
+          'type': 'LABEL_DETECTION',
+          'maxResults': 5
         }
       ]
     }
   ]
 }
 
-var searchUrl;
-//takes in a URL in the form of a string, and max number of results 
-//returns response object
-function visionByURL(url, numResults) {
-  search.requests[0].image.source.imageUri = url;
-  search.requests[0].features[0].maxResults = numResults;
-  searchUrl = url;
+var searchUrl
+// takes in a URL in the form of a string, and max number of results
+// returns response object
+function visionByURL (url, numResults) {
+  search.requests[0].image.source.imageUri = url
+  search.requests[0].features[0].maxResults = numResults
+  searchUrl = url
   // 1. Load the JavaScript client library.
-  return gapi.load('client', start);
+  return gapi.load('client', start)
 }
 
-function start() {
+function start () {
   // 2. Initialize the JavaScript client library.
   return gapi.client.init({
-    'apiKey': 'AIzaSyB5sUYWoVsXdrrobdoe9u2NUiTP-QrbuQU',
+    'apiKey': 'AIzaSyB5sUYWoVsXdrrobdoe9u2NUiTP-QrbuQU'
   })
     .then(function () {
       // 3. Initialize and make the API request.
@@ -118,35 +115,32 @@ function start() {
       })
     })
     .then(function (response) {
-      var labels = [];
-      var rawLabels = response.result.responses[0].labelAnnotations;
+      var labels = []
+      var rawLabels = response.result.responses[0].labelAnnotations
 
       for (var i = 0; i < rawLabels.length; i++) {
-        labels[i] = rawLabels[i].description;
+        labels[i] = rawLabels[i].description
       }
-      console.log("Labels array: ", labels)
+      console.log('Labels array: ', labels)
 
       // update firebase
-      var database = firebase.database();
       var dataObj = {
         url: searchUrl,
         labels: labels
       }
-      database.ref().child("newSearch").set(JSON.stringify(dataObj));
-      database.ref().child("gallery").push(JSON.stringify(dataObj));
+      database.ref().child('newSearch').set(JSON.stringify(dataObj))
+      database.ref().child('gallery').push(JSON.stringify(dataObj))
     }, function (reason) {
-      console.log('Error: ' + reason.result.error.message);
-    });
+      console.log('Error: ' + reason.result.error.message)
+    })
 };
 
-//visionByURL("https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr06/2013/5/7/10/enhanced-buzz-16842-1367938322-0.jpg?downsize=700:*&output-format=auto&output-quality=auto", 5);
-
+// visionByURL("https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr06/2013/5/7/10/enhanced-buzz-16842-1367938322-0.jpg?downsize=700:*&output-format=auto&output-quality=auto", 5);
 
 // firebase listener
-database.ref().on("child_changed", function (snapshot) {
-
-  //checks if the change was because google cloud vision just completed
-  if (snapshot.key === "newSearch"){
+database.ref().on('child_changed', function (snapshot) {
+  // checks if the change was because google cloud vision just completed
+  if (snapshot.key === 'newSearch') {
     // create buttons of the labels in the snapshot, which will trigger wikipedia API
   }
 })
