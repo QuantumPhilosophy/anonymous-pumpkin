@@ -13,57 +13,6 @@ firebase.initializeApp(config)
 
 var database = firebase.database()
 
-$(window).ready(function () {
-  $('#instructionModal').modal('show')
-
-  // Image carousel loader
-  $('.center').slick({
-    centerMode: true,
-    centerPadding: '60px',
-    slidesToShow: 3,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 3
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 1
-        }
-      }
-    ]
-  })
-})
-
-// Handles the animation transition for upload page -> results page
-// TODO: When we are adding reset page (or upload another image) might need to tinker with this
-// 'hide' class simply sets display:none property
-$('#imgSubmit').on('click', function () {
-  $('#imgInputDiv').addClass('slideOutRight')
-
-  $('#imgInputDiv').on('animationend', function () {
-    $('#imgInputDiv').addClass('hide')
-    $('#resultsDiv').removeClass('hide')
-    $('#resultsDiv').addClass('slideInLeft')
-    $('#reset').removeClass('hide')
-  })
-})
-
-$('#reset').on('click', function () {
-  location.reload()
-})
-
-$('form').submit(false)
-
 // google vision API key: AIzaSyB5sUYWoVsXdrrobdoe9u2NUiTP-QrbuQU
 // takes in a POST request, not a GET
 // takes an object in POST request, returns an object with results
@@ -168,3 +117,55 @@ const populateWikiCards = (params) => {
 }
 
 callWikipedia(wikiSearchTermValue)
+
+// Window Load and DOM interaction
+$(window).ready(function () {
+  $('#instructionModal').modal('show')
+
+  // Image carousel loader
+  $('.center').slick({
+    centerMode: true,
+    centerPadding: '60px',
+    slidesToShow: 3,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: '40px',
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: '40px',
+          slidesToShow: 1
+        }
+      }
+    ]
+  })
+})
+
+// Handles the animation transition for upload page -> results page
+// TODO: When we are adding reset page (or upload another image) might need to tinker with this
+// 'hide' class simply sets display:none property
+$('#imgSubmit').on('click', function () {
+  $('#imgInputDiv').addClass('slideOutRight')
+
+  $('#imgInputDiv').on('animationend', function () {
+    $('#imgInputDiv').addClass('hide')
+    $('#resultsDiv').removeClass('hide')
+    $('#resultsDiv').addClass('slideInLeft')
+    $('#reset').removeClass('hide')
+  })
+})
+
+$('#reset').on('click', function () {
+  location.reload()
+})
+
+$('form').submit(false)
