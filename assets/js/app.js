@@ -65,6 +65,9 @@ function start () {
       })
     })
     .then(function (response) {
+      if (response.result.responses[0].error) {
+        $('#error-message').text(response.result.responses[0].error.message).removeClass('hide')
+      }
       let labels = []
       let rawLabels = response.result.responses[0].labelAnnotations
 
@@ -118,7 +121,12 @@ const populateLabelButtons = (labels) => {
 }
 
 const populateWikiCards = (params) => {
+  $('#error-message').addClass('hide')
   $('#result-cards').empty()
+
+  if (params[1].length === 0) {
+    $('#error-message').text('There are no Wikipedia pages with the title: ' + params[0]).removeClass('hide')
+  }
   for (let i = 0; i < params[1].length; i++) {
     for (let j = 0; j < params[0][j].length; j++) {
       let newColumn = $('<div class="col-sm-12 col-md-6 col-lg-4 my-1">')
@@ -182,12 +190,40 @@ database.ref().child('gallery').once('value', function (galSnapshot) {
 
 // Window Load and DOM interaction
 $(window).ready(function () {
-  $('#instructionModal').modal('show')
+  if (sessionStorage.getItem('modal-shown') === null || false) {
+    $('#instructionModal').modal('show')
+    sessionStorage.setItem('modal-shown', true)
+  }
 
   // Image carousel loader
   Particles.init({
     selector: '.background',
-    connectParticles: true
+    connectParticles: true,
+    responsive: [
+      {breakpoint:768,
+        options: {
+          maxParticles:
+            200,
+          connectParticles:
+            false
+        }
+      }, {
+        breakpoint:425,
+        options: {
+          maxParticles:100,
+          connectParticles:
+            false
+        }
+      }, {
+        breakpoint:320,
+        options: {
+          maxParticles:
+            0
+
+          // disables particles.js
+        }
+      }
+    ]
   })
 })
 

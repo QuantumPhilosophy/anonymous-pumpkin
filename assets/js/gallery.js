@@ -1,3 +1,34 @@
+$(window).ready(function () {
+  Particles.init({
+    selector: '.background',
+    connectParticles: true,
+    responsive: [
+      {breakpoint:768,
+        options: {
+          maxParticles:
+            200,
+          connectParticles:
+            false
+        }
+      }, {
+        breakpoint:425,
+        options: {
+          maxParticles:100,
+          connectParticles:
+            false
+        }
+      }, {
+        breakpoint:320,
+        options: {
+          maxParticles:
+            0
+
+          // disables particles.js
+        }
+      }
+    ]
+  })
+})
 
 $(window).on('load', function () {
   $('.slider-for').slick({
@@ -58,8 +89,14 @@ database.ref().child('gallery').once('value', function (snapshot) {
 
     var newCardTextVal = $('<p>')
     newCardTextVal.addClass('card-text')
+
     // wiki snippet will need to be added here
-    newCardTextVal.text(arr[i].labels)
+    // newCardTextVal.text(arr[i].labels)  ==> for text only labels. Replaced with button code below
+    for (var j = 0; j < arr[i].labels.length; j++) {
+      var label = arr[i].labels[j]
+      const labelButton = $(`<button class="label-button btn btn-secondary m-1" value="${label}">${label}</button>`)
+      newCardTextVal.append(labelButton)
+    }
 
     newCardTextDiv.append(newCardTextVal)
     newCard.append(newCardImg)
@@ -67,4 +104,16 @@ database.ref().child('gallery').once('value', function (snapshot) {
 
     $('#cards').append(newCard)
   }
+})
+
+$(document).on('click', '.label-button', function () {
+  var wikiSearchTerm = $(this).val()
+  $.ajax({
+    'url': 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + wikiSearchTerm + '&limit=2&namespace=0&format=json&origin=*'
+  }).then(function (response) {
+    console.log('test', response)
+    $('.modal-title').text(response[0])
+    $('.modal-body').html(response[2][0] + '<br>' + "<a target='_blank' href='" + response[3][0] + "'>" + response[3][0] + '</a>')
+    $('#wikiModal').modal('show')
+  })
 })
