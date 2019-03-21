@@ -68,7 +68,6 @@ function start () {
       if (response.result.responses[0].error) {
         $('#error-message').text(response.result.responses[0].error.message).removeClass('hide')
       }
-
       let labels = []
       let rawLabels = response.result.responses[0].labelAnnotations
 
@@ -109,7 +108,6 @@ const callWikipedia = (wikiSearchTerm) => {
   $.ajax({
     'url': 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + wikiSearchTerm + '&limit=5&namespace=0&format=json&origin=*'
   }).then(function (response) {
-    console.log(response)
     populateWikiCards(response)
   })
 }
@@ -160,7 +158,7 @@ $('.center').slick({
       settings: {
         arrows: false,
         centerMode: true,
-        centerPadding: '40px',
+      centerPadding: '40px',
         slidesToShow: 3
       }
     },
