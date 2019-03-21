@@ -190,7 +190,32 @@ $(window).ready(function () {
   // Image carousel loader
   Particles.init({
     selector: '.background',
-    connectParticles: true
+    connectParticles: true,
+    responsive: [
+      {breakpoint:768,
+        options: {
+          maxParticles:
+            200,
+          connectParticles:
+            false
+        }
+      }, {
+        breakpoint:425,
+        options: {
+          maxParticles:100,
+          connectParticles:
+            false
+        }
+      }, {
+        breakpoint:320,
+        options: {
+          maxParticles:
+            0
+
+          // disables particles.js
+        }
+      }
+    ]
   })
 })
 
