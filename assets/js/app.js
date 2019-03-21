@@ -150,7 +150,7 @@ $('.center').slick({
       settings: {
         arrows: false,
         centerMode: true,
-      centerPadding: '40px',
+        centerPadding: '40px',
         slidesToShow: 3
       }
     },
@@ -182,7 +182,10 @@ database.ref().child('gallery').once('value', function (galSnapshot) {
 
 // Window Load and DOM interaction
 $(window).ready(function () {
-  $('#instructionModal').modal('show')
+  if (sessionStorage.getItem('modal-shown') === null || false) {
+    $('#instructionModal').modal('show')
+    sessionStorage.setItem('modal-shown', true)
+  }
 
   // Image carousel loader
   Particles.init({
