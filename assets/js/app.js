@@ -231,15 +231,20 @@ $(window).ready(function () {
 // TODO: When we are adding reset page (or upload another image) might need to tinker with this
 // 'hide' class simply sets display:none property
 $('#imgSubmit').on('click', function () {
-  visionByURL($('#imgUrlInput').val(), 5)
-  $('#img-url').html($(`<img src="${searchUrl}" class="result-img">`))
-  $('#imgInputDiv').addClass('slideOutRight')
-  $('#imgInputDiv').on('animationend', function () {
-    $('#imgInputDiv').addClass('hide')
-    $('#resultsDiv').removeClass('hide')
-    $('#resultsDiv').addClass('slideInLeft')
-    $('#reset').removeClass('hide')
-  })
+  if ($('#imgUrlInput').val() !== '') {
+    $('#user-feedback').addClass('hide')
+    visionByURL($('#imgUrlInput').val(), 5)
+    $('#img-url').html($(`<img src="${searchUrl}" class="result-img">`))
+    $('#imgInputDiv').addClass('slideOutRight')
+    $('#imgInputDiv').on('animationend', function () {
+      $('#imgInputDiv').addClass('hide')
+      $('#resultsDiv').removeClass('hide')
+      $('#resultsDiv').addClass('slideInLeft')
+      $('#reset').removeClass('hide')
+    })
+  } else {
+    $('#user-feedback').text('Please enter an image.').removeClass('hide')
+  }
 })
 
 $(document).on('click', '.label-button', (event) => {
