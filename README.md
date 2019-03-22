@@ -10,6 +10,10 @@ Firebase is used to store previously analyzed images utilizing a real time datab
 #### Google Cloud Vision
 https://cloud.google.com/vision/
 
+Takes in the URL for a publicly accessible image, and then analyzes that image. By using the `LABEL_DETECTION` mode, the API will return an object with labels of what it believes is in the image, ranked by weight. 
+
+The API calls are handled by google's helper library "gapi", which makes the actual AJAX requests.
+
 #### Wikipedia
 For the information look up for labels returned by Google Cloud Vision API the https://en.wikipedia.org/w/api.php end point was selected.
 
