@@ -1,7 +1,8 @@
-# anonymous-pumpkin
+# Wat Dis?
+https://quantumphilosophy.github.io/anonymous-pumpkin/
 
 ## Description
-This app will take advantage of an image analysis API and then will return information from a second API based on the image's subjects
+This app (Wat Dis?) will take advantage of an image analysis API and then will return information from a second API based on the image's subjects
 
 ### Firebase
 Firebase is used to store previously analyzed images utilizing a real time database
